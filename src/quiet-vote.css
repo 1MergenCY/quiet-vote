@@ -103,6 +103,7 @@
 .q-privacy > svg, .q-decision > svg { color: var(--green); margin-bottom: 4px; }
 .q-side-panel p:not(.q-online, .q-submitted) { font-size: 13px; color: var(--muted); margin: 3px 0 9px; overflow-wrap: anywhere; }
 .q-side-panel .q-button { width: 100%; }
+.q-copy-status { margin-top: 8px; color: var(--green); font-size: 13px; }
 .q-side-panel .q-field + .q-field, .q-side-panel .q-field + button { margin-top: 10px; }
 .q-ranks { padding: 0 19px; margin: 0; list-style: none; }
 .q-ranks li { padding: 12px 0; border-top: 1px solid var(--line); }

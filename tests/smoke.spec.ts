@@ -18,6 +18,13 @@ test('the public example can be completed on a narrow screen', async ({ page }) 
   await page.getByLabel('Next step').fill('Contact the volunteer coordinator.')
   await page.getByRole('button', { name: 'Save decision' }).click()
   await expect(page.getByText('Contact the volunteer coordinator.')).toBeVisible()
+  await page.evaluate(() => {
+    Object.defineProperty(navigator.clipboard, 'writeText', {
+      value: () => Promise.reject(new DOMException('Clipboard blocked', 'NotAllowedError')),
+    })
+  })
+  await page.getByRole('button', { name: 'Copy summary' }).click()
+  await expect(page.getByLabel('Select and copy the summary')).toHaveValue(/Next step: Contact the volunteer coordinator/)
   await page.getByRole('button', { name: 'Restart example' }).click()
   await expect(page.getByText('2 of 3 submitted')).toBeVisible()
   expect(errors).toEqual([])

@@ -1,6 +1,6 @@
 # Quiet Vote
 
-Quiet Vote helps small teams make a decision without letting the first opinion set the direction. A host defines two to four options and weighted criteria, then shares a room link. Participants score independently. The host reveals weighted group results, sees which option and criterion drew the widest spread, and records a decision, rationale, and next action.
+Quiet Vote helps small teams make a decision without letting the first opinion set the direction. A host defines two to four options and weighted criteria, then shares a room link. Participants score independently. The host reveals weighted group results, sees which option and criterion drew the widest spread, and records a decision, rationale, and next action. Room members can copy the final summary to their meeting notes.
 
 The homepage has a complete interactive example using fictional participants. Create a room to use the real, persistent workflow with teammates. Anyone with the room link and a DeepSpace sign-in can join. Treat the link as an invitation and share it with the intended group.
 
@@ -32,6 +32,6 @@ npm run validate
 npx deepspace test run all
 ```
 
-The two-browser test uses two local DeepSpace test accounts. Provision them using `npx deepspace test accounts create --help`, then run the suite. The test covers room creation, invite join, private ballots, an unauthorized reveal, live updates, late-vote rejection, results, and a saved decision after reload. The public smoke test exercises the example on a narrow viewport.
+The two-browser test uses two local DeepSpace test accounts. Provision them using `npx deepspace test accounts create --help`, then run the suite. The test covers room creation, invite join, private ballots, an unauthorized reveal, live updates, late-vote rejection, results, and copying a saved decision after reload. The public smoke test exercises the example on a narrow viewport.
 
 Use the homepage for a quick walkthrough. Select scores for the nine cells, submit the ballot, reveal results, and record a decision and next step. For the team path, repeat with two separate signed-in browser profiles.

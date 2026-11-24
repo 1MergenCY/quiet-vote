@@ -76,10 +76,34 @@ export function RoomBoard({ room, run, demo = false, online, copyInvite }: {
           }}><Eye size={16} /> Reveal results</button>}
         </div>}
         {room.phase === 'revealed' && host && <DecisionForm options={room.options} busy={busy} save={(option, reason, next) => send({ type: 'decide', option, reason, next })} />}
-        {room.decision && <div className="q-side-panel q-decision"><Check size={18} /><h3>{room.options[room.decision.option]}</h3>
-          <p>{room.decision.reason}</p><h4>Next step</h4><p>{room.decision.next}</p></div>}
+        {room.decision && <DecisionSummary title={room.title} option={room.options[room.decision.option]} reason={room.decision.reason} next={room.decision.next} />}
       </aside>
     </div>
+  </section>
+}
+
+function DecisionSummary({ title, option, reason, next }: { title: string; option: string; reason: string; next: string }) {
+  const [copyStatus, setCopyStatus] = useState<'idle' | 'copied' | 'manual'>('idle')
+  const summary = `${title}\n\nDecision: ${option}\nRationale: ${reason}\nNext step: ${next}`
+
+  async function copy() {
+    try {
+      await navigator.clipboard.writeText(summary)
+      setCopyStatus('copied')
+    } catch {
+      setCopyStatus('manual')
+    }
+  }
+
+  return <section className="q-side-panel q-decision" aria-label="Saved decision">
+    <Check size={18} /><h3>{option}</h3><p>{reason}</p><h4>Next step</h4><p>{next}</p>
+    <button type="button" className="q-button q-secondary" onClick={() => void copy()}>
+      {copyStatus === 'copied' ? <Check size={15} /> : <Clipboard size={15} />} Copy summary
+    </button>
+    {copyStatus === 'copied' && <div className="q-copy-status" role="status">Summary copied.</div>}
+    {copyStatus === 'manual' && <label className="q-field q-copy-status">Select and copy the summary
+      <textarea readOnly rows={6} value={summary} onFocus={e => e.currentTarget.select()} />
+    </label>}
   </section>
 }
 
